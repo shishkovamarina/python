@@ -19,3 +19,38 @@
 # “количество”: [5, 2, 7],
 # “ед”: [“шт.”]
 # }
+goods = []
+number = 1
+while input("Вы хотите ввести добавить новый продукт? Введите да или нет: \n ") == 'да':
+    features = {}
+    name_key = "название:"
+    price_key = "цена:"
+    quantity_key = "количество:"
+    unit_key = "ед.:"
+    name = input("Введите наименование продукта:\n")
+    while True:
+        price = input("Введите стоимость продукта:\n")
+        if price.isdigit():
+            price = int(price)
+            break
+    while True:
+        quantity = input("Введите количество продукта:\n")
+        if quantity.isdigit():
+            quantity = int(quantity)
+            break
+    unit = input("Введите единицу измерения продукта:\n")
+    features[name_key] = name
+    features[price_key] = price
+    features[quantity_key] = quantity
+    features[unit_key] = unit
+    goods.append(tuple([number, features]))
+    number += 1
+print(goods)
+analytics = {}
+for good in goods:
+    for name_key, name in good[1].items():
+        if name_key in analytics:
+            analytics[name_key].append(name)
+        else:
+            analytics[name_key] = [name]
+print("Аналитика:\n", analytics)
